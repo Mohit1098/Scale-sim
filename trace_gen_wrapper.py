@@ -127,7 +127,7 @@ def gen_all_traces(
                                  sram_read_trace_file)
                                  #array_h, array_w)
 
-    return bw_numbers, detailed_log, util, sram_cycles
+    return bw_numbers, detailed_log, str((util*float(sram_cycles))/float(total_cycles)), str(total_cycles)
 
 
 def gen_max_bw_numbers( dram_ifmap_trace_file, dram_filter_trace_file,
