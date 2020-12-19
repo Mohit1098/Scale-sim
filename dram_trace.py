@@ -110,7 +110,7 @@ def dram_traces_with_delay(
         if(len(sram_ifmap_buffer2)<ifmap_sram_size and sram_ifmap_buffer2_cycle<=max_compute_cycle):
 
             #Bandwidth
-            count = default_read_bw
+            count = math.floor(default_read_bw/word_size_bytes)
             trace= str(cycle)+", "
 
             while(len(sram_ifmap_buffer2)<ifmap_sram_size
@@ -137,7 +137,8 @@ def dram_traces_with_delay(
 
         # fill filter in one cycle
         if(len(sram_filter_buffer2)<filter_sram_size and sram_filter_buffer2_cycle<=max_compute_cycle):
-            count = default_read_bw
+
+            count = math.floor(default_read_bw/word_size_bytes)
             trace= str(cycle)+", "
 
             while(len(sram_filter_buffer2)<filter_sram_size and count>0 and sram_filter_buffer2_cycle<=max_compute_cycle):
@@ -162,7 +163,7 @@ def dram_traces_with_delay(
 
         # Move data from sram_ofmap_buffer2 to DRAM in one cycle
         if(sram_ofmap_buffer2_size>0):
-            count = default_write_bw
+            count = math.floor(default_write_bw/word_size_bytes)
             trace= str(cycle)+", "
 
             while(sram_ofmap_buffer2_size>0 and count>0):
