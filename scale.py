@@ -105,6 +105,8 @@ class scale:
             df_string = "Weight Stationary"
         elif self.dataflow == 'is':
             df_string = "Input Stationary"
+        elif self.dataflow == 'rs':
+            df_string = "Row Stationary"
 
         print("====================================================")
         print("******************* SCALE SIM **********************")
