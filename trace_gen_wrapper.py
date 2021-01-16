@@ -14,6 +14,8 @@ def gen_all_traces(
 
         data_flow = 'os',
 
+        buffer_swap_factor=0.7,
+
         word_size_bytes = 1,
         filter_sram_size = 64, ifmap_sram_size= 64, ofmap_sram_size = 64,
 
@@ -83,7 +85,7 @@ def gen_all_traces(
         ifmap_base=ifmap_base,
         ofmap_base = ofmap_base,
 
-        buffer_swap_factor=0.7,
+        buffer_swap_factor=buffer_swap_factor,
 
         word_size_bytes = word_size_bytes,
         default_read_bw = 10,

@@ -9,7 +9,7 @@ FLAGS = flags.FLAGS
 #name of flag | default | explanation
 flags.DEFINE_string("arch_config","./configs/scale.cfg","file where we are getting our architechture from")
 flags.DEFINE_string("network","./topologies/conv_nets/alexnet.csv","topology that we are reading")
-
+flags.DEFINE_float("buffer_swap_factor",0.7,"")
 
 class scale:
     def __init__(self, sweep = False, save = False):
@@ -80,6 +80,9 @@ class scale:
         ofmap_offset = config.get(arch_sec, 'OfmapOffset')
         self.ofmap_offset = int(ofmap_offset.strip())
 
+        self.buffer_swap_factor = FLAGS.buffer_swap_factor
+
+
         ## Read network_presets
         ## For now that is just the topology csv filename
         #topology_file = config.get(net_sec, 'TopologyCsvLoc')
@@ -126,7 +129,8 @@ class scale:
                     net_name = net_name,
                     data_flow = self.dataflow,
                     topology_file = self.topology_file,
-                    offset_list = offset_list
+                    offset_list = offset_list,
+                    buffer_swap_factor=self.buffer_swap_factor,
                 )
         self.cleanup()
         print("************ SCALE SIM Run Complete ****************")

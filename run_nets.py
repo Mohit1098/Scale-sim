@@ -11,7 +11,8 @@ def run_net( ifmap_sram_size=1,
              data_flow = 'os',
              topology_file = './topologies/yolo_v2.csv',
              net_name='yolo_v2',
-             offset_list = [0, 10000000, 20000000]
+             offset_list = [0, 10000000, 20000000],
+             buffer_swap_factor=0.7
             ):
 
     ifmap_sram_size *= 1024
@@ -47,15 +48,15 @@ def run_net( ifmap_sram_size=1,
 
 
     first = True
-    
+
     for row in param_file:
         if first:
             first = False
             continue
-            
+
         elems = row.strip().split(',')
         #print(len(elems))
-        
+
         # Do not continue if incomplete line
         if len(elems) < 9:
             continue
@@ -74,7 +75,7 @@ def run_net( ifmap_sram_size=1,
         num_filters = int(elems[6])
 
         strides = int(elems[7])
-        
+
         ifmap_base  = offset_list[0]
         filter_base = offset_list[1]
         ofmap_base  = offset_list[2]
@@ -105,7 +106,8 @@ def run_net( ifmap_sram_size=1,
                                 sram_write_trace_file= net_name + "_" + name + "_sram_write.csv",
                                 dram_filter_trace_file=net_name + "_" + name + "_dram_filter_read.csv",
                                 dram_ifmap_trace_file= net_name + "_" + name + "_dram_ifmap_read.csv",
-                                dram_ofmap_trace_file= net_name + "_" + name + "_dram_ofmap_write.csv"
+                                dram_ofmap_trace_file= net_name + "_" + name + "_dram_ofmap_write.csv",
+                                buffer_swap_factor=buffer_swap_factor,
                             )
 
         bw_log += bw_str
@@ -139,5 +141,4 @@ def run_net( ifmap_sram_size=1,
     param_file.close()
 
 #if __name__ == "__main__":
-#    sweep_parameter_space_fast()    
-
+#    sweep_parameter_space_fast()

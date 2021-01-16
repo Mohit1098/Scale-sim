@@ -39,6 +39,8 @@ def dram_traces_with_delay(
     dram_ofmap_trace_file = "dram_ofmap_write.csv"
     ):
 
+
+
     sram_read_requests=open(sram_read_trace_file,'r')
     sram_write_requests=open(sram_write_trace_file,'r')
 
